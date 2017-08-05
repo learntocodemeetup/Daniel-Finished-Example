@@ -97,25 +97,31 @@ class App extends Component {
         this.setState({
             mastermindLayout: mastermindLayout.map((guessRow, index) => {
 
-                let position = 0;
                 if (index === activeRow) {
                     let feedbackRow = guessRow.feedbackRow;
+                    let positionFilled = [false, false, false, false];
+                    let position = 0;
+
                     feedbackRow.forEach((guessColor, index) => {
 
-                        if (precise > 0) {
-                            feedbackRow[position] = "black";
-                            position += 1;
-                            precise -= 1;
+
+
+                        if (position < 4) {
+                            if (precise > 0 && positionFilled[position] !== true) {
+                                feedbackRow[position] = "black";
+                                positionFilled[position] = true;
+                                position += 1;
+                                precise -= 1;
+                            }
+
+                            if (partial > 0 && positionFilled[position] !== true) {
+                                feedbackRow[position] = "red";
+                                positionFilled[position] = true;
+                                position += 1;
+                                partial -= 1;
+
+                            }
                         }
-
-                        if (partial > 0) {
-                            feedbackRow[position] = "red";
-                            position += 1;
-                            partial -= 1;
-
-                        }
-
-
                     });
                 }
 

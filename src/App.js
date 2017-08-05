@@ -132,8 +132,8 @@ class App extends Component {
     }
 
     render() {
-        console.log("The state object contains:");
-        console.log(this.state);
+        console.log("State:", this.state);
+        console.log("mastermindAnswer:", this.state.mastermindAnswer);
         const reactRows = this.state.mastermindLayout.map(
             (row, index) => {
                 const rowColorsArray = this.state.mastermindLayout[index].coloredRow;

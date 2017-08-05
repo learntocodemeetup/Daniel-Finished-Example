@@ -1,16 +1,13 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-import SpecialCircle from './SpecialCircle';
-
-import headCheck from './head-check.svg';
+import Circle from './Circle';
 
 class ColorSelector extends Component {
 
     static propTypes = {
         setActiveColor: PropTypes.func.isRequired,
         colorsArray: PropTypes.array.isRequired,
-        comparisonCheck: PropTypes.func.isRequired,
         activeColor: PropTypes.string.isRequired
     };
 
@@ -21,28 +18,17 @@ class ColorSelector extends Component {
                 {this.props.colorsArray.map(
                     (color, index) => {
                         return (
-                            <SpecialCircle
+                            <Circle
                                 key={index}
                                 color={color}
-                                setActiveColor={this.props.setActiveColor}
-                                size="big"
+                                onClick={() => this.props.setActiveColor(color)}
+                                type="select"
                                 activeColor={this.props.activeColor}
                             />
                         );
 
                     }
                 )}
-
-                <img
-                    className="head-check-image"
-                    alt="head check"
-                    src={headCheck}
-                    onClick={this.props.comparisonCheck}
-                    title="Check how smart you are"
-
-                />
-
-
             </div>
         );
 

@@ -1,7 +1,11 @@
+* {
+    box-sizing: border-box;
+}
+
 #root {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
+  /*height: 100vh;*/
+  /*display: flex;*/
+  /*flex-direction: column;*/
 }
 
 body {
@@ -11,25 +15,50 @@ body {
 }
 
 .App {
-  flex: 1;
-  text-align: center;
+  /*flex: 1;*/
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-wrap: wrap;
+  /*flex-direction: column;
+  justify-content: center;*/
+  width: 390px;
   margin: 0 auto;
 }
 
-.gameBoard {
+.mastermind-image {
+    max-width: 100%;
+}
 
-  flex: 1;
+.game-title {
+    flex-basis: 100%;
+    text-align: center;
+}
+
+.game-title h1 {
+    margin: 0;
+}
+
+.game-board {
+  /*flex: 1;
   display: flex;
-  flex-direction: row;
+  flex-direction: row;*/
+  width: 320px;
+  padding: 10px 0;
+}
+
+.selector-panel {
+    padding: 30px 10px;
+}
+
+.feedback {
+    display: flex;
+    flex-wrap: wrap;
+    flex-basis: 100px;
 }
 
 .row {
     margin: 0.5rem 0;
-    display: flex;
-    flex-direction: row;
+    /*display: flex;
+    flex-direction: row;*/
     border: 1px solid white;
 }
 
@@ -40,9 +69,32 @@ body {
 
 
 .circle {
-    border: solid transparent;
+    border: 2px solid transparent;
     border-radius: 50%;
-    margin: 5px;
+    width: 40px;
+    height: 40px;
+}
+
+.row {
+    display: flex;
+}
+
+.guess {
+    margin-right: 20px;
+    width: 400px;
+}
+
+.guess .circle {
+    border: 2px solid black;
+    display: inline-block;
+    margin: 0 5px 0 5px;
+}
+
+.feedback .circle {
+    width: 16px;
+    height: 16px;
+    margin: 0 2px 0 2px;
+    border: 2px solid black;
 }
 
 .active-circle {
@@ -54,24 +106,17 @@ body {
     flex-direction: row;
 }
 
-.fourDots {
-    width: 40px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.color-selector {
-    position: relative;
-    top: 10px;
-    left: 60px;
+.color-selector .circle {
+    margin: 2px 0;
 }
 
 .head-check-image {
-    margin-top: 20px;
-    width: 50px;
+    margin-top: 8px;
+    width: 43px;
     height: auto;
 
+}
+
+.winner-image {
+    width: 400px;
 }

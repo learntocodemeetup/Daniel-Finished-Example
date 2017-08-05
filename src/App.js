@@ -1,48 +1,50 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-
+// import PropTypes from 'prop-types';
 
 import Row from './Row';
-import ColorSelector from './ColorSelector'
+import Check from './Check';
+import ColorSelector from './ColorSelector';
+
+import mastermindImage from './mastermind.jpg';
+import winner from './winner.png'
+
+import mastermindLayout from './utils/mastermindLayout';
+import generateMastermindAnswer from './utils/generateMastermindAnswer';
+import compare from './utils/compare'
+
 
 import './index.css';
 
-const ROWS_HEIGHT = 10;
-const ROWS_LENGTH = 4;
+// const ROWS_HEIGHT = 10;
+// const ROWS_LENGTH = 4;
 
 class App extends Component {
 
-    static propTypes = {
-        colorCircles: PropTypes.arrayOf(PropTypes.string).isRequired,
-        mastermindAnswers: PropTypes.arrayOf(PropTypes.string).isRequired
+    state = {
+        mastermindLayout: mastermindLayout,
+        activeColor: 'red',
+        activeRow: 0,
+        winner: false,
+        mastermindAnswer: generateMastermindAnswer()
     };
 
-    static initialSetup() {
-        let state = {
-            activeColor: 'red',
-            activeRow: 0,
-            winner: false,
-            precise: 0,
-            partial: 0
-        };
-        let mastermindLayout = [];
-        for (let i = 0; i < ROWS_HEIGHT; i++) {
-            const coloredRow = [];
-            for (let j = 0; j < ROWS_LENGTH; j++) {
-                coloredRow.push('white');
-            }
-            mastermindLayout.push(coloredRow);
-        }
-
-        state.mastermindLayout = mastermindLayout;
-        state.feedbackArray = mastermindLayout.map((val) => val.slice());
-        return state
-    }
-
-    constructor(props) {
-        super(props);
-        this.state = App.initialSetup();
-    }
+    // static initialSetup() {
+    //     let state = {
+    //
+    //     };
+    //     // let mastermindLayout = [];
+    //     // for (let i = 0; i < ROWS_HEIGHT; i++) {
+    //     //     const coloredRow = [];
+    //     //     for (let j = 0; j < ROWS_LENGTH; j++) {
+    //     //         coloredRow.push('white');
+    //     //     }
+    //     //     mastermindLayout.push(coloredRow);
+    //     // }
+    //     //
+    //     // state.mastermindLayout = mastermindLayout;
+    //     // state.feedbackArray = mastermindLayout.map((val) => val.slice());
+    //     // return state
+    // }
 
     setActiveColor = (color) => {
         this.setState({activeColor: color})
@@ -50,63 +52,86 @@ class App extends Component {
 
     setCircleColor = (rowIndex, columnIndex) => {
         let mastermindLayout = this.state.mastermindLayout;
-        mastermindLayout[rowIndex][columnIndex] = this.state.activeColor;
+
         if (rowIndex === this.state.activeRow) {
-            this.setState({mastermindAnswers: mastermindLayout});
+            mastermindLayout[rowIndex].coloredRow[columnIndex] = this.state.activeColor;
+            this.setState({mastermindLayout: mastermindLayout});
         }
     };
 
     comparisonCheck = () => {
-
-        let precise = 0;
-        let partial = 0;
         let activeRow = this.state.activeRow;
+        let mastermindAnswer = this.state.mastermindAnswer;
+        let guessRow = this.state.mastermindLayout[activeRow].coloredRow;
 
-        const checkColor = [false, false, false, false];
+        let results = compare(mastermindAnswer, guessRow);
+        let partial = results[0];
+        let precise = results[1];
 
-        console.log("active row is:", this.state.mastermindLayout[this.state.activeRow]);
-        let guessRow = this.state.mastermindLayout[this.state.activeRow];
-        guessRow.forEach(
-            (guess, index) => {
-                let mastermindAnswers = this.props.mastermindAnswers;
-
-                if (guess === mastermindAnswers) {
-                    precise += 1;
-                }
-
-                if (mastermindAnswers.indexOf(guess) !== -1 && checkColor[index] === false) {
-                    checkColor[index] = true;
-                    partial++;
-                }
-            }
-        );
-
-        partial = Math.max(partial - precise, 0);
-
-        activeRow++;
         console.log("active row is", activeRow);
-        console.log(`mastermind array is:`, this.props.mastermindAnswers);
+        console.log(`mastermind array is:`, this.state.mastermindAnswer);
         console.log(`our guess is:`, guessRow);
         console.log(`There were ${precise} precise guesses`);
         console.log(`There were ${partial} partial guesses`);
 
         if (precise === 4) {
-            this.setState({winner: true, activeRow, partial, precise});
+            this.setState({
+                winner: true,
+            });
+
             console.log("You win!");
         } else {
-            this.setState({winner: false, activeRow, partial, precise});
+            this.setState({
+                activeRow: this.state.activeRow + 1,
+
+            });
             console.log("Wrong!!!");
         }
 
+        this.updateFeedback(partial, precise, activeRow);
 
     };
 
+    updateFeedback(partial, precise, activeRow) {
+        let mastermindLayout = this.state.mastermindLayout;
+        this.setState({
+            mastermindLayout: mastermindLayout.map((guessRow, index) => {
+
+                let position = 0;
+                if (index === activeRow) {
+                    let feedbackRow = guessRow.feedbackRow;
+                    feedbackRow.forEach((guessColor, index) => {
+
+                        if (precise > 0) {
+                            feedbackRow[position] = "black";
+                            position += 1;
+                            precise -= 1;
+                        }
+
+                        if (partial > 0) {
+                            feedbackRow[position] = "red";
+                            position += 1;
+                            partial -= 1;
+
+                        }
+
+
+                    });
+                }
+
+                return guessRow;
+
+            })
+        });
+    }
+
     render() {
+        console.log("The state object contains:");
         console.log(this.state);
         const reactRows = this.state.mastermindLayout.map(
             (row, index) => {
-                const rowColorsArray = this.state.mastermindLayout[index];
-                const feedbackArray = this.state.feedbackArray[index];
+                const rowColorsArray = this.state.mastermindLayout[index].coloredRow;
+                const feedbackArray = this.state.mastermindLayout[index].feedbackRow;
                 const isActive = this.state.activeRow === index;
 
                 return (
@@ -114,12 +139,9 @@ class App extends Component {
                         key={index}
                         rowIndex={index}
                         feedbackArray={feedbackArray}
-                        isActiveRow={isActive}
                         rowColorsArray={rowColorsArray}
+                        isActiveRow={isActive}
                         setCircleColor={this.setCircleColor}
-                        precise={this.state.precise}
-                        partial={this.state.partial}
-                        activeColor={this.state.activeColor}
                     />
                 );
             }
@@ -127,21 +149,33 @@ class App extends Component {
 
         return (
             <div className="App">
-                <h1>Mastermind</h1>
-                {this.state.winner ? <p>Winner!</p> : ""}
-                <section className="gameBoard">
+                <section className="game-title">
+                    {/* <h1>Mastermind</h1> */}
+                    <img src={mastermindImage} className="mastermind-image" alt="Mastermind logo"/>
+                    {this.state.winner ? <img className="winner-image" src={winner} alt="You won the game!"/> : ""}
+                </section>
+
+                <section className="game-board">
+
+
                     <div className="rows">
                         { reactRows }
                     </div>
+
+
+
+
+                </section>
+
+                <section className="selector-panel">
                     <ColorSelector
                         activeColor={this.state.activeColor}
                         setActiveColor={this.setActiveColor}
                         colorsArray={["red", "orange", "yellow", "green", "blue", "indigo"]}
-                        comparisonCheck={this.comparisonCheck}
+
                     />
-
+                    <Check comparisonCheck={this.comparisonCheck} />
                 </section>
-
             </div>
         );
     }

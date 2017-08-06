@@ -46,6 +46,10 @@ class App extends Component {
     //     // return state
     // }
 
+    componentDidMount() {
+        console.log("mastermindAnswer:", this.state.mastermindAnswer);
+    }
+
     setActiveColor = (color) => {
         this.setState({activeColor: color})
     };
@@ -132,8 +136,6 @@ class App extends Component {
     }
 
     render() {
-        console.log("State:", this.state);
-        console.log("mastermindAnswer:", this.state.mastermindAnswer);
         const reactRows = this.state.mastermindLayout.map(
             (row, index) => {
                 const rowColorsArray = this.state.mastermindLayout[index].coloredRow;

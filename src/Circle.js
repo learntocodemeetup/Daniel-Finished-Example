@@ -7,7 +7,8 @@ class Circle extends Component {
     static propTypes = {
         color: PropTypes.string.isRequired,
         type: PropTypes.string.isRequired,
-        onClick: PropTypes.func
+        onClick: PropTypes.func,
+        activeColor: PropTypes.string
         // rowIndex: PropTypes.number.isRequired,
         // circleIndex: PropTypes.number.isRequired
     };

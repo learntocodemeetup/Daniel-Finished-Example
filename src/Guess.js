@@ -28,8 +28,6 @@ class Guess extends Component {
             }
         );
         return (
-
-
             <div className="guess">
                 { coloredCircles }
             </div>

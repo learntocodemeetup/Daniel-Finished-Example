@@ -22,10 +22,10 @@ class App extends Component {
 
     state = {
         mastermindLayout: mastermindLayout,
+        mastermindAnswer: generateMastermindAnswer(),
         activeColor: 'red',
         activeRow: 0,
         winner: false,
-        mastermindAnswer: generateMastermindAnswer()
     };
 
     // static initialSetup() {
@@ -72,11 +72,7 @@ class App extends Component {
         let partial = results[0];
         let precise = results[1];
 
-        console.log("active row is", activeRow);
-        console.log(`mastermind array is:`, this.state.mastermindAnswer);
-        console.log(`our guess is:`, guessRow);
-        console.log(`There were ${precise} precise guesses`);
-        console.log(`There were ${partial} partial guesses`);
+        console.log(`There were ${precise} precise guesses and ${partial} partial guesses for row ${activeRow}`);
 
         if (precise === 4) {
             this.setState({

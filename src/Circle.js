@@ -9,8 +9,6 @@ class Circle extends Component {
         type: PropTypes.string.isRequired,
         onClick: PropTypes.func,
         activeColor: PropTypes.string
-        // rowIndex: PropTypes.number.isRequired,
-        // circleIndex: PropTypes.number.isRequired
     };
 
     render() {

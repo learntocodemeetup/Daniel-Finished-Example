@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-// import PropTypes from 'prop-types';
 
 import Row from './Row';
 import Check from './Check';
@@ -13,15 +12,13 @@ import generateMastermindAnswer from './utils/generateMastermindAnswer';
 import compare from './utils/compare'
 
 
-import './index.css';
+import './css/index.css';
 
-// const ROWS_HEIGHT = 10;
-// const ROWS_LENGTH = 4;
 
 class App extends Component {
 
     state = {
-        mastermindLayout: mastermindLayout,
+        mastermindLayout: mastermindLayout(),
         mastermindAnswer: generateMastermindAnswer(),
         activeColor: 'red',
         activeRow: 0,

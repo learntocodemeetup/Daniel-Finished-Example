@@ -5,7 +5,7 @@ class Circle extends Component {
 
     static propTypes = {
         color: PropTypes.string.isRequired,
-        type: PropTypes.string.isRequired,
+        type: PropTypes.oneOf(["select", "feedback", "guess"]).isRequired,
         onClick: PropTypes.func,
         activeColor: PropTypes.string
     };

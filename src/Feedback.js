@@ -10,7 +10,6 @@ class Feedback extends Component {
     };
 
     render() {
-        const smallCircleStyle = {borderColor: 'black', borderWidth: '1px'};
 
         const feedbackCircles = this.props.feedbackArray.map(
             (value, index) => {
@@ -19,15 +18,12 @@ class Feedback extends Component {
                         key={index}
                         color={value}
                         type="feedback"
-                        css={smallCircleStyle}
                     />
                 );
             }
         );
 
         return (
-
-
             <div className="feedback">
                 { feedbackCircles }
             </div>

@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-import _headCheck from './_head-check.svg';
-
+import headCheck from './images/head-check.svg';
 
 class Check extends Component {
 
@@ -16,10 +15,9 @@ class Check extends Component {
                 <img
                     className="head-check-image"
                     alt="head check"
-                    src={_headCheck}
+                    src={headCheck}
                     onClick={this.props.comparisonCheck}
                     title="Check how smart you are"
-
                 />
             </div>
         );

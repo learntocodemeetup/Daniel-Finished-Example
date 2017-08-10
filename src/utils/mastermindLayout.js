@@ -1,72 +1,42 @@
 export default [
 	{
-		coloredRow: ["white", "white", "white", "white"],
-		feedbackRow: ["white", "white", "white", "white"],
-		completed: false,
-        partial: 0,
-        precise: 0
+		colored: ["white", "white", "white", "white"],
+		feedback: ["white", "white", "white", "white"]
 	},
 	{
-		coloredRow: ["white", "white", "white", "white"],
-		feedbackRow: ["white", "white", "white", "white"],
-		completed: false,
-        partial: 0,
-        precise: 0
+		colored: ["white", "white", "white", "white"],
+		feedback: ["white", "white", "white", "white"]
 	},
 	{
-		coloredRow: ["white", "white", "white", "white"],
-		feedbackRow: ["white", "white", "white", "white"],
-		completed: false,
-        partial: 0,
-        precise: 0
+		colored: ["white", "white", "white", "white"],
+		feedback: ["white", "white", "white", "white"]
 	},
 	{
-		coloredRow: ["white", "white", "white", "white"],
-		feedbackRow: ["white", "white", "white", "white"],
-		completed: false,
-        partial: 0,
-        precise: 0
+		colored: ["white", "white", "white", "white"],
+		feedback: ["white", "white", "white", "white"]
 	},
 	{
-		coloredRow: ["white", "white", "white", "white"],
-		feedbackRow: ["white", "white", "white", "white"],
-		completed: false,
-        partial: 0,
-        precise: 0
+		colored: ["white", "white", "white", "white"],
+		feedback: ["white", "white", "white", "white"]
 	},
 	{
-		coloredRow: ["white", "white", "white", "white"],
-		feedbackRow: ["white", "white", "white", "white"],
-		completed: false,
-        partial: 0,
-        precise: 0
+		colored: ["white", "white", "white", "white"],
+		feedback: ["white", "white", "white", "white"]
 	},
 	{
-		coloredRow: ["white", "white", "white", "white"],
-		feedbackRow: ["white", "white", "white", "white"],
-		completed: false,
-        partial: 0,
-        precise: 0
+		colored: ["white", "white", "white", "white"],
+		feedback: ["white", "white", "white", "white"]
 	},
 	{
-		coloredRow: ["white", "white", "white", "white"],
-		feedbackRow: ["white", "white", "white", "white"],
-		completed: false,
-        partial: 0,
-        precise: 0
+		colored: ["white", "white", "white", "white"],
+		feedback: ["white", "white", "white", "white"]
 	},
 	{
-		coloredRow: ["white", "white", "white", "white"],
-		feedbackRow: ["white", "white", "white", "white"],
-		completed: false,
-        partial: 0,
-        precise: 0
+		colored: ["white", "white", "white", "white"],
+		feedback: ["white", "white", "white", "white"]
 	},
     {
-		coloredRow: ["white", "white", "white", "white"],
-		feedbackRow: ["white", "white", "white", "white"],
-		completed: false,
-        partial: 0,
-        precise: 0
+		colored: ["white", "white", "white", "white"],
+		feedback: ["white", "white", "white", "white"]
 	}
 ];

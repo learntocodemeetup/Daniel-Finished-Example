@@ -12,16 +12,14 @@ class Guess extends Component {
     };
 
     render() {
-        const bigCircleStyle = {borderColor: 'grey', borderWidth: '2px'};
-
+        console.log("Hi", this.props.rowColorsArray);
         const coloredCircles = this.props.rowColorsArray.map(
-            (value, index) => {
+            (color, index) => {
                 return (
                     <Circle
                         key={index}
-                        color={this.props.rowColorsArray[index]}
+                        color={color}
                         type="guess"
-                        css={bigCircleStyle}
                         onClick={() => this.props.setCircleColor(this.props.rowIndex, index)}
                     />
                 );

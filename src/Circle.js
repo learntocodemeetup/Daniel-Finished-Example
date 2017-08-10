@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-
 class Circle extends Component {
 
     static propTypes = {
@@ -27,7 +26,6 @@ class Circle extends Component {
                 onClick={this.props.onClick}
             />
         );
-
     }
 }
 

@@ -5,8 +5,8 @@ import Row from './Row';
 import Check from './Check';
 import ColorSelector from './ColorSelector';
 
-import mastermindImage from './mastermind.jpg';
-import winner from './winner.png'
+import mastermindImage from './images/mastermind.jpg';
+import winner from './images/winner.png'
 
 import mastermindLayout from './utils/mastermindLayout';
 import generateMastermindAnswer from './utils/generateMastermindAnswer';
@@ -28,24 +28,6 @@ class App extends Component {
         winner: false,
     };
 
-    // static initialSetup() {
-    //     let state = {
-    //
-    //     };
-    //     // let mastermindLayout = [];
-    //     // for (let i = 0; i < ROWS_HEIGHT; i++) {
-    //     //     const coloredRow = [];
-    //     //     for (let j = 0; j < ROWS_LENGTH; j++) {
-    //     //         coloredRow.push('white');
-    //     //     }
-    //     //     mastermindLayout.push(coloredRow);
-    //     // }
-    //     //
-    //     // state.mastermindLayout = mastermindLayout;
-    //     // state.feedbackArray = mastermindLayout.map((val) => val.slice());
-    //     // return state
-    // }
-
     componentDidMount() {
         console.log("mastermindAnswer:", this.state.mastermindAnswer);
     }
@@ -55,87 +37,48 @@ class App extends Component {
     };
 
     setCircleColor = (rowIndex, columnIndex) => {
-        let mastermindLayout = this.state.mastermindLayout;
 
         if (rowIndex === this.state.activeRow) {
-            mastermindLayout[rowIndex].coloredRow[columnIndex] = this.state.activeColor;
-            this.setState({mastermindLayout: mastermindLayout});
+            //this.state.mastermindLayout[rowIndex].colored[columnIndex] = this.state.activeColor;
+            this.setState({
+                mastermindLayout: this.state.mastermindLayout.map((row, index) => {
+                    if (index === this.state.activeRow) {
+                        row.colored[columnIndex] = this.state.activeColor;
+                    }
+                    return row;
+
+                })
+            });
         }
     };
 
     comparisonCheck = () => {
         let activeRow = this.state.activeRow;
         let mastermindAnswer = this.state.mastermindAnswer;
-        let guessRow = this.state.mastermindLayout[activeRow].coloredRow;
+        let guess = this.state.mastermindLayout[activeRow].colored;
 
-        let results = compare(mastermindAnswer, guessRow);
-        let partial = results[0];
-        let precise = results[1];
+        let feedback = compare(mastermindAnswer, guess);
+        console.log(feedback);
 
-        console.log(`There were ${precise} precise guesses and ${partial} partial guesses for row ${activeRow}`);
+        this.setState({
+            mastermindLayout: this.state.mastermindLayout.map((row, index) => {
+                if (index === activeRow) {
+                    row.feedback = feedback;
+                }
 
-        if (precise === 4) {
-            this.setState({
-                winner: true,
-            });
+                return row;
+            }),
+            activeRow: this.state.activeRow + 1
+        });
 
-            console.log("You win!");
-        } else {
-            this.setState({
-                activeRow: this.state.activeRow + 1,
-
-            });
-            console.log("Wrong!!!");
-        }
-
-        this.updateFeedback(partial, precise, activeRow);
 
     };
 
-    updateFeedback(partial, precise, activeRow) {
-        let mastermindLayout = this.state.mastermindLayout;
-        this.setState({
-            mastermindLayout: mastermindLayout.map((guessRow, index) => {
-
-                if (index === activeRow) {
-                    let feedbackRow = guessRow.feedbackRow;
-                    let positionFilled = [false, false, false, false];
-                    let position = 0;
-
-                    feedbackRow.forEach((guessColor, index) => {
-
-
-
-                        if (position < 4) {
-                            if (precise > 0 && positionFilled[position] !== true) {
-                                feedbackRow[position] = "black";
-                                positionFilled[position] = true;
-                                position += 1;
-                                precise -= 1;
-                            }
-
-                            if (partial > 0 && positionFilled[position] !== true) {
-                                feedbackRow[position] = "red";
-                                positionFilled[position] = true;
-                                position += 1;
-                                partial -= 1;
-
-                            }
-                        }
-                    });
-                }
-
-                return guessRow;
-
-            })
-        });
-    }
-
     render() {
-        const reactRows = this.state.mastermindLayout.map(
+        const rows = this.state.mastermindLayout.map(
             (row, index) => {
-                const rowColorsArray = this.state.mastermindLayout[index].coloredRow;
-                const feedbackArray = this.state.mastermindLayout[index].feedbackRow;
+                const rowColorsArray = this.state.mastermindLayout[index].colored;
+                const feedbackArray = this.state.mastermindLayout[index].feedback;
                 const isActive = this.state.activeRow === index;
 
                 return (
@@ -163,11 +106,8 @@ class App extends Component {
 
 
                     <div className="rows">
-                        { reactRows }
+                        { rows }
                     </div>
-
-
-
 
                 </section>
 

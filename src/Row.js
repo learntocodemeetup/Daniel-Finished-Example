@@ -20,8 +20,6 @@ class Row extends Component {
         const activeRowClass = this.props.isActiveRow ? "row active-row" : "row";
 
         return (
-
-
             <div className={activeRowClass}>
                 <Guess
                     rowIndex={this.props.rowIndex}

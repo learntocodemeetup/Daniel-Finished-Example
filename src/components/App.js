@@ -4,15 +4,15 @@ import Row from './Row';
 import Check from './Check';
 import ColorSelector from './ColorSelector';
 
-import mastermindImage from './images/mastermind.jpg';
-import winner from './images/winner.png'
+import mastermindImage from '../images/mastermind.jpg';
+import winner from '../images/winner.png'
 
-import mastermindLayout from './utils/mastermindLayout';
-import generateMastermindAnswer from './utils/generateMastermindAnswer';
-import compare from './utils/compare'
+import mastermindLayout from '../utils/mastermindLayout';
+import generateMastermindAnswer from '../utils/generateMastermindAnswer';
+import compare from '../utils/compare'
 
 
-import './css/index.css';
+import '../css/index.css';
 
 
 class App extends Component {

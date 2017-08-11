@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-import headCheck from './images/head-check.svg';
+import headCheck from '../images/head-check.svg';
 
 class Check extends Component {
 

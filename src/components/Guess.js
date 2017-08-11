@@ -12,7 +12,6 @@ class Guess extends Component {
     };
 
     render() {
-        console.log("Hi", this.props.rowColorsArray);
         const coloredCircles = this.props.rowColorsArray.map(
             (color, index) => {
                 return (

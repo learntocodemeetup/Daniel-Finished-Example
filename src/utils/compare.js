@@ -45,6 +45,9 @@ export default function compare(mastermind, guess) {
             if (guessCopy[i] === mastermindCopy[j]) {
                 // partial += 1;
                 mastermindCopy[j] = true;
+                guessCopy[i] = true;
+
+
                 for (let z = 0; z < feedback.length; z++) {
                     if (feedback[z] === "white") {
                         feedback[z] = "red";

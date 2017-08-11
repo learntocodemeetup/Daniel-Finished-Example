@@ -55,12 +55,12 @@ export default function compare(mastermind, guess) {
         }
     }
 
-    console.log("Mastermind:", mastermind);
-    console.log("Guess:", guess);
-    console.log("");
-    console.log("Feedback", feedback);
-    console.log("----------------");
-    console.log("");
+    // console.log("Mastermind:", mastermind);
+    // console.log("Guess:", guess);
+    // console.log("");
+    // console.log("Feedback", feedback);
+    // console.log("----------------");
+    // console.log("");
 
     return feedback;
 

@@ -55,7 +55,7 @@ class App extends Component {
         let guess = this.state.mastermindLayout[activeRow].colored;
 
         let feedback = compare(mastermindAnswer, guess);
-        console.log(feedback);
+        // console.log(feedback);
 
         this.setState({
             mastermindLayout: this.state.mastermindLayout.map((row, index) => {
@@ -68,7 +68,11 @@ class App extends Component {
             activeRow: this.state.activeRow + 1
         });
 
-
+        if (JSON.stringify(feedback) === '["black","black","black","black"]') {
+            this.setState({
+                winner: true
+            });
+        }
     };
 
     render() {

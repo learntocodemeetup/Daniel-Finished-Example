@@ -30,22 +30,27 @@ export default function compare(mastermind, guess) {
     // These need to be taken out so that they are not
     // counted twice
 
-    mastermindCopy = mastermindCopy.filter(function(colour) {
-        return colour !== true;
-    });
-
-    guessCopy = guessCopy.filter(function(colour) {
-        return colour !== true;
-    });
+    // mastermindCopy = mastermindCopy.filter(function(colour) {
+    //     return colour !== true;
+    // });
+    //
+    // guessCopy = guessCopy.filter(function(colour) {
+    //     return colour !== true;
+    // });
 
     // then check for partials
 
     for (let i = 0; i < guessCopy.length; i++) {
         for (let j = 0; j < mastermindCopy.length; j++) {
+            if (guessCopy[i] === true) {
+                break; // short circuit
+            }
+
             if (guessCopy[i] === mastermindCopy[j]) {
                 // partial += 1;
-                mastermindCopy[j] = true;
                 guessCopy[i] = true;
+                mastermindCopy[j] = true;
+
 
 
                 for (let z = 0; z < feedback.length; z++) {
